@@ -12,9 +12,12 @@ function fibonacci(x) {
   return fiboResult;
 }
 
-let x = 13;
-let fibo = fibonacci(x);
-console.log(fibo);
+function fibonacciInput() {
+  let userInput = document.getElementById("fibo-input");
+  document.getElementById("y").innerText = fibonacci(userInput.value);
+  console.log(userInput.value);
+}
 
-document.getElementById("x").innerText = x;
-document.getElementById("y").innerText = fibo;
+document
+  .getElementById("fibo-button")
+  .addEventListener("click", fibonacciInput);
