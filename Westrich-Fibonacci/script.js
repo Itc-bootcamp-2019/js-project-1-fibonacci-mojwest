@@ -12,12 +12,18 @@ function fibonacci(x) {
   return fiboResult;
 }
 
-function fibonacciInput() {
-  let userInput = document.getElementById("fibo-input");
-  document.getElementById("y").innerText = fibonacci(userInput.value);
-  console.log(userInput.value);
+function fibonacciServer() {
+  let userInput = document.getElementById("fibo-input").value;
+  console.log(userInput);
+  fetch(`http://localhost:5050/fibonacci/${userInput}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.result);
+      document.getElementById("result").innerText = data.result;
+    })
+    .catch(err => console.error(err));
 }
 
 document
   .getElementById("fibo-button")
-  .addEventListener("click", fibonacciInput);
+  .addEventListener("click", fibonacciServer);
