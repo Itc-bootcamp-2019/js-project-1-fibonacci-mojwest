@@ -4,6 +4,10 @@ body {
   font-family: open sans;
 }
 
+#toobig {
+  color: red;
+}
+
 #fibo-input {
   width: 60px;
   height: 20px;
@@ -14,5 +18,46 @@ body {
   background-color: #0275d8;
   color: #ffffff;
   margin-right: 5px;
-  height: 20px;
+  height: 25px;
 }
+
+#result {
+  font-size: 24px;
+}
+#mol {
+  color: red;
+}
+
+#listFromServer {
+  margin-top: 30px;
+  padding-left: 0px;
+}
+
+li {
+  border-bottom: 1px solid black;
+  width: 750px;
+  line-height: 2em;
+}
+
+#loader {
+  visibility: hidden;
+  /* border: 8px solid #f3f3f3; /* Light grey */
+  /* border-top: 8px solid black; */
+  /* border-radius: 50%; */
+  /* width: 15px; */
+  /* height: 15px; */
+  /* animation: spin 2s linear infinite; */
+}
+
+/* @keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
+/* .hide-loader {
+  display: none;
+} */
