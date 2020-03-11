@@ -23,6 +23,12 @@ function hideResult() {
 function showResult() {
   document.getElementById("result").style.visibility = "visible";
 }
+function showResultsSpinner() {
+  document.getElementById("resultsLoader").style.visibility = "visible";
+}
+function hideResultsSpinner() {
+  document.getElementById("resultsLoader").style.visibility = "hidden";
+}
 
 function fibonacciServer() {
   showSpinner();
@@ -68,3 +74,37 @@ function fibonacciServer() {
 document
   .getElementById("fibo-button")
   .addEventListener("click", fibonacciServer);
+
+function fiboResults() {
+  showResultsSpinner();
+  let resultUrl = "http://localhost:5050/getFibonacciResults";
+  fetch(resultUrl)
+    .then(response => response.json())
+    .then(data => {
+      let resultsArray = data.results;
+      hideResultsSpinner();
+      for (let i = 0; i < resultsArray.length; i++) {
+        attempt = resultsArray[i];
+        console.log(attempt);
+        let dateCreated = new Date(attempt.createdDate);
+        let ul = document.getElementById("listFromServer");
+        ul.style.listStyle = "none";
+        let li = document.createElement("li");
+        li.innerHTML =
+          "The Fibonacci of " +
+          `<b>` +
+          attempt.number +
+          `</b>` +
+          " is " +
+          `<b>` +
+          attempt.result +
+          `</b>` +
+          ". Calculated at: " +
+          dateCreated;
+        ul.appendChild(li);
+      }
+    });
+}
+window.onload = fiboResults;
+
+document.getElementById("fibo-button").addEventListener("click", fiboResults);
