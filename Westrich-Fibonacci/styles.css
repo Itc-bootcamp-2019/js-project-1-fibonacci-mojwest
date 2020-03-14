@@ -4,6 +4,10 @@ body {
   font-family: open sans;
 }
 
+.fib-of {
+  font-size: 24px;
+}
+
 #toobig {
   color: red;
 }
@@ -26,6 +30,15 @@ body {
 }
 #mol {
   color: red;
+}
+
+#save-calculation {
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+#checkbox {
+  margin-right: 5px;
 }
 
 #listFromServer {

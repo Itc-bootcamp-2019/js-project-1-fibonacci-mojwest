@@ -18,7 +18,6 @@ function showTooBig() {
 }
 function hideResult() {
   document.getElementById("result").style.visibility = "hidden";
-  // document.getElementById("result").style.display = "none";
 }
 function showResult() {
   document.getElementById("result").style.visibility = "visible";
@@ -35,7 +34,6 @@ function fibonacciServer() {
   let userInput = document.getElementById("fibo-input").value;
   console.log(userInput);
   if (userInput > 50) {
-    console.log("too big");
     document.getElementById("toobig").innerText =
       "Sorry, that number is too big.";
     hideMol();
@@ -71,18 +69,15 @@ function fibonacciServer() {
   }
 }
 
-document
-  .getElementById("fibo-button")
-  .addEventListener("click", fibonacciServer);
-
 function fiboResults() {
   showResultsSpinner();
   let resultUrl = "http://localhost:5050/getFibonacciResults";
   fetch(resultUrl)
     .then(response => response.json())
     .then(data => {
-      let resultsArray = data.results;
       hideResultsSpinner();
+      data.results.sort((a, b) => b.createdDate - a.createdDate);
+      let resultsArray = data.results;
       for (let i = 0; i < resultsArray.length; i++) {
         attempt = resultsArray[i];
         console.log(attempt);
@@ -105,6 +100,36 @@ function fiboResults() {
       }
     });
 }
+
+function localFibonacci() {
+  showSpinner();
+  let userInput = document.getElementById("fibo-input").value;
+  let firstPrev = 0;
+  let secondPrev = 1;
+  let fiboResult;
+
+  for (let i = 1; i < userInput; i++) {
+    fiboResult = secondPrev + firstPrev;
+    firstPrev = secondPrev;
+    secondPrev = fiboResult;
+  }
+  hideSpinner();
+  document.getElementById("result").innerText = fiboResult;
+
+  return fiboResult;
+}
+
+function serverOrLocal() {
+  let checkBox = document.getElementById("checkbox");
+  if (checkBox.checked === true) {
+    fibonacciServer();
+  } else {
+    localFibonacci();
+  }
+}
+
 window.onload = fiboResults;
 
 document.getElementById("fibo-button").addEventListener("click", fiboResults);
+
+document.getElementById("fibo-button").addEventListener("click", serverOrLocal);
